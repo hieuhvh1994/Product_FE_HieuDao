@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12" style="margin-top: 20px">
+            <mat-card style="margin: 50px 0">
+                <form class="form-register" #f="ngForm" (ngSubmit)="f.form.valid &&ngSubmit()" novalidate>
+                    <mat-error class="alert alert-primary">{{status}}</mat-error>
+                    <!--NAME-->
+                    <mat-form-field style="width: 350px" appearance="outline">
+                        <mat-label>Name</mat-label>
+                        <input matInput placeholder="Name" name="name" [(ngModel)]="form.name" #name="ngModel" minlength="3" maxlength="50" required>
+                        <mat-error *ngIf="name.hasError('required')">The name is required!</mat-error>
+                        <mat-error *ngIf="name.hasError('minlength')">The name must have more than 3 characters!</mat-error>
+                    </mat-form-field>
+                    <br>
+                    <!--DESCRIPTION-->
+                    <mat-form-field style="width: 350px" appearance="outline">
+                        <mat-label>Description</mat-label>
+                        <input matInput placeholder="Description" name="description" [(ngModel)]="form.description" #description="ngModel" minlength="3" maxlength="50" required>
+                        <mat-error *ngIf="description.hasError('required')">The description is required!</mat-error>
+                        <mat-error *ngIf="description.hasError('minlength')">The description must have more than 3 characters!</mat-error>
+                    </mat-form-field>
+                    <br>
+                    <!--DATE OF MANUFACTURE-->
+                    <mat-form-field style="width: 350px" appearance="outline">
+                        <mat-label>Date Of Manufacture</mat-label>
+                        <input matInput [matDatepicker]="picker" name="dateOfManufacture" [(ngModel)]="form.dateOfManufacture" #dateOfManufacture="ngModel" required>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-error *ngIf="dateOfManufacture.hasError('required')">The date of manufacturer is required!</mat-error>
+                    </mat-form-field>
+                    <br>
+                    <!--Avatar-->
+<!--                    <mat-form-field style="width: 350px;" appearance="outline">-->
+                        <mat-label>Image</mat-label>
+                        <app-upload-avatar (giveURLtoCreate)="onChangeAvatar($event)"></app-upload-avatar>
+<!--                    </mat-form-field>-->
+                    <br>
+                    <button mat-stroked-button color="accent" class="mat-button-toggle-group btn-outline-primary">Add New Product
+                        <mat-icon color="accent" matSuffix>add_circle_outline</mat-icon>
+                    </button>
+                </form>
+            </mat-card>
+        </div>
+    </div>
+</div>
